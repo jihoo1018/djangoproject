@@ -1,3 +1,12 @@
 from django.db import models
-
-# Create your models here.
+from datetime import datetime
+class Comment(models.Model):
+    use_in_migration = True
+    comments_id = models.AutoField(primary_key=True)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)
+    class Meta:
+        db_table = "blog_comments"
+    def __str__(self):
+        return f'{self.pk} {self.content} {self.created_at} {self.updated_at}'

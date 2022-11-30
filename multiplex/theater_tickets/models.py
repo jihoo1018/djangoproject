@@ -1,3 +1,11 @@
 from django.db import models
 
-# Create your models here.
+class TheaterTicket(models.Model):
+    use_in_migration = True
+    theater_ticket_id = models.AutoField(primary_key=True)
+    x = models.IntegerField()
+    y = models.IntegerField()
+    class Meta:
+        db_table = "multi_theater_tickets"
+    def __str__(self):
+        return f'{self.pk} {self.x} {self.y}'
