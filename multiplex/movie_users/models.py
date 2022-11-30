@@ -7,6 +7,7 @@ class MovieUser(models.Model):
     nickname = models.TextField()
     password = models.TextField()
     age = models.TextField()
+
     class Meta:
         db_table = "multi_movie_user"
     def __str__(self):

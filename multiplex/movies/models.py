@@ -9,6 +9,7 @@ class Movie(models.Model):
     poster_url = models.TextField()
     running_time = models.TextField()
     age_rating = models.TextField()
+
     class Meta:
         db_table = "muti_movie"
     def __str__(self):

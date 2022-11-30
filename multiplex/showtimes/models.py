@@ -1,10 +1,18 @@
 from django.db import models
 
+from multiplex.cinemas.models import Cinema
+from multiplex.movies.models import Movie
+from multiplex.theaters.models import Theater
+
+
 class Showtime(models.Model):
     use_in_migration = True
     showtime_id = models.AutoField(primary_key=True)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
+    multi_cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE)
+    multi_movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    multi_theater = models.ForeignKey(Theater, on_delete=models.CASCADE)
     class Meta:
         db_table = "multi_showtime"
     def __str__(self):
