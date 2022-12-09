@@ -21,7 +21,7 @@ import sys
 import dlib  # conda install -c conda-forge dlib
 import cv2  # 얼굴 변환 라이브러리
 
-from admin import openface
+import openface
 
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
@@ -78,7 +78,6 @@ class DcGan(object):
 
     def hook(self):
         self.show_face()
-        self.weights_init()
         self.print_netG()
         self.print_netD()
         self.fake_images()
@@ -271,7 +270,8 @@ class DcGan(object):
             plt.show()
 
     def generate_fake_faces(self):
-        pass
+        that = MyDlib()
+        that.hook()
 
 class Generator(nn.Module):
     def __init__(self, ngpu):
@@ -350,7 +350,7 @@ class MyDlib(object):
 
         # http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
         # 학습된 랜드마크 모델 데이터 경로
-        predictor_model = "shape_predictor_68_face_landmarks.dat"
+        predictor_model = r"C:\Users\AIA\PycharmProjects\djangoProject\admin\files\shape_predictor_68_face_landmarks.dat"
 
         # HOG 이용한 얼굴 감지 클래스 생성 - dlib
         face_detector = dlib.get_frontal_face_detector()
@@ -364,7 +364,7 @@ class MyDlib(object):
         face_aligner = openface.AlignDlib(predictor_model)
 
         # 첫번째 매개변수로 부터 전달 받은 이미지 파일 경로
-        file_name = sys.argv[1]
+        file_name = r"C:\Users\AIA\PycharmProjects\djangoProject\multiplex\movies\data\lenna.png"
 
         # 이미지 파일 경로로 부터 이미지(numpy.ndarry) 불러오기
         image = cv2.imread(file_name)
@@ -454,6 +454,7 @@ dc_menu = ["Exit", #0
                 ]
 dc_lambda = {
     "1" : lambda x: x.hook(),
+    "2" : lambda x: x.generate_fake_faces(),
 }
 if __name__ == '__main__':
     dc = DcGan()
