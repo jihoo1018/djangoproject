@@ -269,7 +269,7 @@ class DcGan(object):
             plt.imshow(np.transpose(img_list[-1], (1, 2, 0)))
             plt.show()
 
-    def generate_fake_faces(self):
+    def my_dlib(self):
         that = MyDlib()
         that.hook()
 
@@ -454,7 +454,7 @@ dc_menu = ["Exit", #0
                 ]
 dc_lambda = {
     "1" : lambda x: x.hook(),
-    "2" : lambda x: x.generate_fake_faces(),
+    "2" : lambda x: x.my_dlib(),
 }
 if __name__ == '__main__':
     dc = DcGan()
