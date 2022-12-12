@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
 from admin.views import hello
 
 urlpatterns = [
     path('', hello),
     path("blog/auth/",include('blog.blog_users.urls')),
-    path("mplex/movies/",include('multiplex.movies.urls'))
+    path("mplex/movies/",include('multiplex.movies.urls')),
+    path("blog/",include('blog.urls'))
 ]

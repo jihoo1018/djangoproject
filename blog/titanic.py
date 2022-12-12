@@ -42,7 +42,7 @@ class TitanicModel(object):
 
     def new_model(self, fname) -> object:
         this = self.dataset
-        this.context = './data/'
+        this.context = '../data/titanic/'
         this.fname = fname
         return pd.read_csv(this.context + this.fname)
 

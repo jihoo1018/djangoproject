@@ -58,7 +58,7 @@ dtypes: float64(1), int64(5), object(6)
 class MpgService:
 
     def __init__(self):
-        self.mpg = pd.read_csv('data/mpg.csv')
+        self.mpg = pd.read_csv('../data/mpg/mpg.csv')
         self.my_mpg = None
 
     '''
@@ -146,4 +146,21 @@ class MpgService:
     def find_top3_avg(self):
         pass
 
+
+def my_menu(ls):
+    for i, j in enumerate(ls):
+        print(f"{i}. {j}")
+    return input('메뉴선택: ')
+if __name__ == '__main__':
+    t = MpgService()
+    while True:
+        menu = my_menu(MPG_MENUS)
+        if menu == '0':
+            print("종료")
+            break
+        else:
+            try:
+                mpg_menu[menu](t)
+            except KeyError:
+                print(" ### Error ### ")
 
