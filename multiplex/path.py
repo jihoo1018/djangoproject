@@ -1,0 +1,3 @@
+HAAR = "haarcascade_frontalface_alt.xml" # 가중치 파일
+CTX = "../../../../static"
+static = "../../../../static"
