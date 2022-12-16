@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     "blog",
     "multiplex",
     "shop",
-    "rest_framework"
+    "rest_framework",
+    "admin.dlearn",
+    "corsheaders"
 ]
 #CORS 관련 추가
 CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:3000',
