@@ -29,6 +29,10 @@ class FashionModel(object):
         print(f"저장경로: {file_name}")
         model.save(file_name)
 
+
+
+
+
 menu = ["Exit", "create_model"]  # 1
 menu_lambda = {
     "1": lambda x: x.create_model(),

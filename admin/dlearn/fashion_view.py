@@ -9,14 +9,26 @@ import tensorflow as tf
 
 from admin.dlearn.fashion_service import FashionService
 
-
-@api_view(["GET"])
+@api_view(['POST', 'GET'])
+@parser_classes([JSONParser])
 def fashion(request):
-    print(f"######## React getID is {request.GET['num']} ########")
-    return JsonResponse({'result': FashionService().service_model(int(request.GET['num']))})
+    if request.method == 'POST':
+        id = json.loads(request.body)  # json to dict
+        print(f"######## POST id is {id} type is {type(id)} ########")
+        a = FashionService().service_model(int(id))
+        print(f" 리턴결과 : {a} ")
+        return JsonResponse({'result': a})
+    elif request.method == 'GET':
+        print(f"######## GET id is {request.GET['id']} ########")
+        return JsonResponse(
+            {'result': FashionService().service_model(int(request.GET['id']))})
 
-@api_view(["POST"])
-def fashion(request):
-    data = json.loads(request.body)  # json to dict
-    print(f"######## React postID is {data['id']} ########")
-    return JsonResponse({'result': FashionService().service_model(int(data['id']))})
+        """
+        data = request.data
+        test_num = tf.constant(int(data['test_num']))
+        result = FashionService().service_model([test_num])
+        return JsonResponse({'result': result})
+        """
+
+    else:
+        print(f"######## ID is None ########")
