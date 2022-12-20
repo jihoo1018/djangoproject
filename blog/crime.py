@@ -6,7 +6,7 @@ import pandas as pd
 from sklearn import preprocessing
 import folium
 
-from multiplex.path import CTX
+from admin.dlearn.webcrawler.path import CTX
 
 '''
 <class 'pandas.core.frame.DataFrame'>

@@ -23,5 +23,6 @@ urlpatterns = [
     path("mplex/movies/",include('multiplex.movies.urls')),
     path("blog/",include('blog.urls')),
     path("shop/",include('shop.urls')),
-    path("admin/dlearn/",include('admin.dlearn.urls'))
+    path("admin/dlearn/",include('admin.dlearn.urls')),
+    path("admin/dlearn/webcrawler/", include('admin.dlearn.webcrawler.url'))
 ]

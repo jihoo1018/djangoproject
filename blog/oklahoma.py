@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.preprocessing import OrdinalEncoder
 
-from multiplex.path import static
+from admin.dlearn.webcrawler.path import static
 
 oklahoma_meta = {
     'id':'아이디', 'gender':'성별', 'age':'나이',

@@ -1,8 +1,8 @@
 from io import BytesIO
 import requests
 from PIL import Image
-from multiplex.crawler import HEADERS
-from multiplex.path import HAAR, CTX
+from admin.dlearn.webcrawler.crawler import HEADERS
+from admin.dlearn.webcrawler.path import HAAR, CTX
 from matplotlib import pyplot as plt
 from multiplex.lambdas import MosaicLambda
 import cv2 as cv

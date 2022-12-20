@@ -1,7 +1,7 @@
 import cv2 as cv
 from PIL import Image
 
-from multiplex.path import CTX
+from admin.dlearn.webcrawler.path import CTX
 
 def MosaicLambda(*params):
     cmd = params[0]
