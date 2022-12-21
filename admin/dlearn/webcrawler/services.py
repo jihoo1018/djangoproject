@@ -58,8 +58,13 @@ class ScrapService(object):
     def naver_movie_review(self):
         if os.path.exists(r"C:\Users\AIA\PycharmProjects\djangoProject\admin\dlearn\webcrawler\save\naver_movie_rank.csv") == True:
             dt = pd.read_csv(r"C:\Users\AIA\PycharmProjects\djangoProject\admin\dlearn\webcrawler\save\naver_movie_rank.csv")
-            result = [f'{i + 1}위 : {j}' for i, j in enumerate(dt)]
-            return result[0]
+            # result = [f'{i + 1}위 : {j} ,' for i, j in enumerate(dt)]
+            result = []
+            for i, j in enumerate(dt):
+                i = {"rank" : i+1, "title" : j}
+                result.append(i)
+                print(result)
+            return result
 
         else:
             options = webdriver.ChromeOptions()
