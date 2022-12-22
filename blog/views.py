@@ -11,4 +11,4 @@ from blog.stroke import Stroke
 def stroke(request):
     Stroke().hook()
     print(f'Enter Stroke with {request}')
-    return JsonResponse({'Response Test': 'SUCCESS'})
+    return JsonResponse({'Response Training': 'SUCCESS'})

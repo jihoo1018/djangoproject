@@ -11,6 +11,6 @@ from multiplex.movies.services import DcGan
 def fake_face(request):
     DcGan().fake_images()
     print(f'Enter Show Faces with {request}')
-    return JsonResponse({'Response Test': 'SUCCESS'})
+    return JsonResponse({'Response Training': 'SUCCESS'})
 
 

@@ -24,5 +24,6 @@ urlpatterns = [
     path("blog/",include('blog.urls')),
     path("shop/",include('shop.urls')),
     path("admin/dlearn/",include('admin.dlearn.urls')),
-    path("admin/dlearn/webcrawler/", include('admin.dlearn.webcrawler.url'))
+    path("admin/dlearn/webcrawler/", include('admin.dlearn.webcrawler.url')),
+    path("admin/nlp/", include('admin.nlp.urls'))
 ]

@@ -37,7 +37,7 @@ In this work we hope to help bridge the gap between the success of CNNs
 for supervised learning and unsupervised learning. We introduce a class 
 of CNNs called deep convolutional generative adversarial networks (DCGANs), 
 that have certain architectural constraints, and demonstrate that they are 
-a strong candidate for unsupervised learning. Training on various image 
+a strong candidate for unsupervised learning. Test on various image 
 datasets, we show convincing evidence that our deep convolutional adversarial
 pair learns a hierarchy of representations from object parts to scenes 
 in both the generator and discriminator. Additionally, we use the learned 
@@ -107,7 +107,7 @@ class DcGan(object):
         real_batch = next(iter(self.dataloader))
         plt.figure(figsize=(8,8))
         plt.axis("off")
-        plt.title("Training Images")
+        plt.title("Test Images")
         plt.imshow(np.transpose(vutils.make_grid(real_batch[0].to(self.device)[:64], padding=2, normalize=True).cpu(),(1,2,0)))
         plt.show()
 
@@ -174,7 +174,7 @@ class DcGan(object):
         # Setup Adam optimizers for both G and D
         optimizerD = optim.Adam(netD.parameters(), lr=lr, betas=(beta1, 0.999))
         optimizerG = optim.Adam(netG.parameters(), lr=lr, betas=(beta1, 0.999))
-        # Training Loop
+        # Test Loop
 
         # Lists to keep track of progress
         img_list = []
@@ -182,7 +182,7 @@ class DcGan(object):
         D_losses = []
         iters = 0
 
-        print("Starting Training Loop...")
+        print("Starting Test Loop...")
         # For each epoch
         for epoch in range(num_epochs):
             # For each batch in the dataloader

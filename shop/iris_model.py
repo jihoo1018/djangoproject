@@ -38,7 +38,7 @@ class IrisModel(object):
         model.add(Dense(3, activation='softmax'))
         model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
         model.fit(X, Y_1hot, epochs=300, batch_size=10)
-        print('Model Training is completed')
+        print('Model Test is completed')
 
         file_name = './save/iris_model.h5'
         model.save(file_name)
