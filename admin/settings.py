@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "blog",
-    "multiplex",
-    "shop",
+    "blog.blog_users","blog.view","blog.comments","blog.tags","blog.posts",
+    "multiplex.cinemas","multiplex.movies","multiplex.showtimes","multiplex.theater_tickets","multiplex.theaters","multiplex.movie_users",
+    "shop.carts","shop.shop_users","shop.orders","shop.deliveries","shop.categories","shop.products",
     "rest_framework",
     "admin.dlearn",
     "corsheaders"

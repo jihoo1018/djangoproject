@@ -8,7 +8,7 @@ from blog.blog_users.services import UserService
 @api_view(['GET'])
 @parser_classes([JSONParser])
 def login(request):
-    users = UserService().get_users()
+    users = UserService().create_users()
     return JsonResponse({'users ': users})
 
 
