@@ -6,8 +6,10 @@ services:
     container_name: jjyu1db
     volumes:
       - ~/docker/mysql/etc/mysql/conf.d:/etc/mysql/conf.d:ro
-      - ~/docker/mysql/var/lib/mysql:/var/lib/mysql
+      - ~/docker/mysql/var/lib/mysql:/var/image:lib/mysql
       - ~/docker/mysql/var/log/mysql:/var/log/mysql
+      - /opt/jjyudb/mysql_data:/var/lib/mysql
+      - /tmp/jjyudb/mysqld:/var/run/mysqld
     environment:
       - MYSQL_DATABASE=jjyudb
       - MYSQL_ROOT_PASSWORD=root
@@ -19,11 +21,16 @@ services:
     image: jjyu1dj:v1
     build: .
     container_name: jjyu1dj
-    command:
-      - python manage.py runserver 0:8000
+    stdin_open: true
+    tty: true
+    command: python manage.py runserver 0:8000
     ports:
       - "8000:8000"
     volumes:
       - .:/jjyu1dj
+      - /tmp/jjyudb/mysqld:/run/mysqld
     expose:
       - "8000"
+    restart: always
+    depends_on:
+        - database
