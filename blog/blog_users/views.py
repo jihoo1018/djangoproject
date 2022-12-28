@@ -12,6 +12,14 @@ def login(request):
     return JsonResponse({'users ': users})
 
 
+@api_view(['GET'])
+@parser_classes([JSONParser])
+def user_list(request):
+    service = UserService()
+    service.get_users()
+    return JsonResponse({"result":service.get_users()})
+
+
 '''
     user_info = request.data
     email = user_info['email']

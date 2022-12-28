@@ -5,10 +5,7 @@ from sqlalchemy import create_engine
 
 class UserService(object):
     def __init__(self):
-        global savepath, filename, engine
-# 랜덤 아이디 ,비번(통일) 로 데이터 프레임 만들기
-        savepath = r"C:\Users\AIA\PycharmProjects\djangoProject\blog\blog_users\save"
-        filename = f"{savepath}\\student_score.sql"
+        global engine
         engine = create_engine(
             "mysql+pymysql://root:root@localhost:3306/jjyudb",
             encoding='utf-8')
@@ -60,6 +57,7 @@ class UserService(object):
         pass
 
     def get_users(self):
+        print("포스트맨의 요청이 도달하였슴!! ")
         pass
 
 
