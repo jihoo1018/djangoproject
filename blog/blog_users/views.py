@@ -1,11 +1,11 @@
 from django.http import JsonResponse
-from rest_framework.authtoken.models import Token
-from rest_framework.decorators import api_view, parser_classes
+from rest_framework import status
 from rest_framework.parsers import JSONParser
+from rest_framework.decorators import api_view, parser_classes
 from rest_framework.response import Response
-from blog.blog_users.models import BlogUser
+
 from blog.blog_users.serializer import BlogUserSerializer
-from blog.blog_users.services import UserService
+from blog.blog_users.repositories import UserRepository
 
 
 '''@api_view(['GET'])
@@ -15,32 +15,45 @@ def login(request):
     return JsonResponse({'users ': users})'''
 
 
+@api_view(['POST','PUT','PATCH','DELETE','GET'])
+@parser_classes([JSONParser])
+def blog_user_view(request):
+    if request.method == "POST":
+        new_user = request.data
+        print(f"리액트에서 등록한 신규 사용자 {new_user}")
+        serializer = BlogUserSerializer(data=new_user)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse({"result":"success"})
+        return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == "PATCH":
+        return None
+    elif request.method == "PUT":
+        rep = UserRepository()
+        modify_user = rep.find_by_email(request.data['email'])
+        db_user = rep.find_by_id(modify_user.blog_userid)
+        serializer = BlogUserSerializer(data=db_user)
+        if serializer.is_valid():
+            serializer.update(modify_user,db_user)
+            return JsonResponse({"result":"success"})
+    elif request.method == "GET":
+        return Response(UserRepository().find_by_email(request.data['email']))
+    elif request.method == "DELETE":
+        rep = UserRepository()
+        delete_user = rep.find_by_email(request.data['email'])
+        db_user = rep.find_by_id(delete_user.blog_userid)
+        db_user.delete()
+        return JsonResponse({"result":"success"})
+
 @api_view(['GET'])
 @parser_classes([JSONParser])
 def user_list(request):
-    if request.method == 'GET':
-        serializer = BlogUserSerializer(BlogUser.objects.all(), many=True)
-        return Response(serializer.data)
+    return UserRepository().get_all()
 
+@api_view(['GET'])
+@parser_classes([JSONParser])
+def user_list_name(request):
+    return UserRepository().find_by_name(request.data['nickname'])
 
 @api_view(['POST'])
-@parser_classes([JSONParser])
-def loginform(request):
-    print(" 진입 ## ")
-    try:
-        print(f"로그인 정보 : {request.data}")
-        info = request.data
-        loginuser = BlogUser.objects.get(email=info['email'])
-        print(f"해당 email을 가진 Userid:{loginuser.blog_userid}")
-        print(f"해당 email을 가진 password:{loginuser.password}")
-        print(f"해당 email을 가진 info password :{info['password']}")
-        if loginuser.password == info["password"]:
-            dbuser = BlogUser.objects.all().filter(blog_userid=loginuser.blog_userid).values()[0]
-            print(f"dbuser is {dbuser}")
-            serialize = BlogUserSerializer(dbuser, many=False)
-            return JsonResponse(data=serialize.data, safe=False)
-        # dictionary이외를 받을 경우, 두번째 argument를 safe=False로 설정해야한다.
-        else:
-            return Response("비번이 틀립니다")
-    except:
-        return Response("이메일이 틀립니다")
+def loginform(request): return UserRepository().login(request.data)
